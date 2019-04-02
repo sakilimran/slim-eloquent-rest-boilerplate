@@ -1,0 +1,8 @@
+.DS_Store
+
+/vendor/*
+/logs/*
+
+# IDE Files
+/nbproject/private/
+.idea/*
