@@ -1,27 +1,56 @@
-# Slim Framework 3 Skeleton Application
+# Slim Eloquent REST Boilerplate Application
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3 with the PHP-View template renderer. It also uses the Monolog logger.
+A PHP-based user-authenticated REST API boilerplate by [S. M. Sakil Imran], using:
+* [Slim 3 Framework](https://www.slimframework.com/docs/)
+* [Eloquent ORM](https://laravel.com/docs/5.6/eloquent)
+* [JWT Authentication](https://github.com/tuupola/slim-jwt-auth) / [PHP-JWT](https://github.com/firebase/php-jwt)
+* [Monolog](https://github.com/Seldaek/monolog)
+* [PHPUnit](https://phpunit.readthedocs.io/en/7.1/index.html)
+* [Phinx](http://docs.phinx.org/en/latest/index.html)
+* [Pimple](https://pimple.symfony.com)
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+## Installation
+* `git clone https://github.com/sakilimran/slim-eloquent-rest-boilerplate.git` clone git repo
+* `cd slim-eloquent-rest-boilerplate` change working directory to root project folder
+* `composer install` install dependencies
+* Edit *./app/Config/Config.php* with MySQL configurations
+* `./vendor/bin/phinx migrate` run initial database migration
 
-## Install the Application
+## Run
+* `cd public` change working directory to public folder and run `localhost -S localhost:8000` via command line
+* or you can use Apache, set virtual host to *public* folder
 
-Run this command from the directory in which you want to install your new Slim Framework application.
+## Tests
+Execute unit tests via PHPUnit by running `./vendor/bin/phpunit ./tests/`.  You can debug tests via XDebug by running `./phpunit-debug ./tests/` (use Git Bash if on Windows).
+This boilerplate's test suite features 100% code coverage out-of-the-box (see report in *./test/coverage/*).  To regenerate code coverage HTML report, run `./vendor/bin/phpunit --coverage-html ./tests/coverage/ --whitelist ./app/ ./tests/`
 
-    php composer.phar create-project slim/slim-skeleton [my-app-name]
-
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
-
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writeable.
-
-To run the application in development, you can run these commands 
-
-	cd [my-app-name]
-	php composer.phar start
-
-Run this command in the application directory to run the test suite
-
-	php composer.phar test
-
-That's it! Now go build something cool.
+## API Documentation
+### HTTP Codes
+* `200` API request successful
+* `400` API request returned an error
+* `401` Unauthorized (access token missing/invalid/expired)
+* `404` API endpoint not found
+### Authentication
+Endpoint | Parameters | Description
+--- | --- | ---
+`POST /users` | `username` *string* required<br>`password` *string* required | creates a user
+`POST /users/login` | `username` *string* required<br>`password` *string* required | generates user access token
+### Endpoints
+All RESTful API endpoints below require a `Authorization: Bearer xxxx` header set on the HTTP request, *xxxx* is replaced with token generated from the Authentication API above.
+#### Categories
+Endpoint | Parameters | Description
+--- | --- | ---
+`GET /categories` | *n/a* | lists all categories
+`GET /categories/{id}` | *n/a* | gets category data by ID
+`GET /categories/{id}/todo` | *n/a* | lists all todo items for a category
+`POST /categories/` | `name` *string* required<br>`category` *integer* required | creates a category
+`PUT /categories/{id}` | `name` *string* optional<br>`category` *integer* optional | updates a category
+`DELETE /categories/{id}` | *n/a* | delete category and associated todo items
+#### Todo Items
+Endpoint | Parameters | Description
+--- | --- | ---
+`GET /todo` | *n/a* | lists all todo items
+`GET /todo/{id}` | *n/a* | gets todo item data by ID
+`POST /todo` | `name` *string* required<br>`category` *integer* required | creates a todo item
+`PUT /todo/{id}` | `name` *string* optional<br>`category` *integer* optional | updates a todo item
+`DELETE /todo/{id}` | *n/a* | deletes a todo item
