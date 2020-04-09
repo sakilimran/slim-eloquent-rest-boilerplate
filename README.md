@@ -13,8 +13,9 @@ A PHP-based user-authenticated REST API boilerplate by [S. M. Sakil Imran], usin
 * `git clone https://github.com/sakilimran/slim-eloquent-rest-boilerplate.git` clone git repo
 * `cd slim-eloquent-rest-boilerplate` change working directory to root project folder
 * `composer install` install dependencies
-* Edit *./app/Config/Config.php* with MySQL configurations
-* `./vendor/bin/phinx migrate` run initial database migration
+* create `Config.php` file from this: `app/Config/Config-default.php` with your configurations
+* create `phinx.yml` file from this: `phinx-default.yml` with your configurations
+* `vendor/bin/phinx migrate` run initial database migration
 
 ## Run
 * `cd public` change working directory to public folder and run `localhost -S localhost:8000` via command line
