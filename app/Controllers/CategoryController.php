@@ -4,7 +4,7 @@ namespace App\Controllers;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Models\Category as Category;
-use App\Includes\ValidationRules as ValidationRules;
+use App\Config\ValidationRules as ValidationRules;
 
 class CategoryController {
     private $logger;
