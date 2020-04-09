@@ -1,5 +1,8 @@
 .DS_Store
 
+phinx.yml
+app/Config/Config.php
+
 /vendor/*
 /logs/*
 
