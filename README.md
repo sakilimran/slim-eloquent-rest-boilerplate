@@ -18,7 +18,7 @@ A PHP-based user-authenticated REST API boilerplate by [S. M. Sakil Imran], usin
 * `vendor/bin/phinx migrate` run initial database migration
 
 ## Run
-* `cd public` change working directory to public folder and run `localhost -S localhost:8000` via command line
+* `cd public` change working directory to public folder and run `php -S localhost:8000` via command line
 * or you can use Apache, set virtual host to *public* folder
 
 ## Tests
